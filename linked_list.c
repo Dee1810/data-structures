@@ -27,6 +27,7 @@ node * ins_beg(int item,node *head)
 	newnode->data=item;
 	newnode->link=head;
 	head=newnode;
+	printf("Node inserted\n");
 	return head;
 }
 
@@ -50,6 +51,7 @@ node * ins_rear(int item,node  *head)
 		}
 		temp->link=newnode;
 	}
+	printf("Node inserted\n");
 	return head;
 }
 
@@ -65,6 +67,7 @@ node * ins_pos(int item,int pos,node *head)
 	if(head==NULL&&pos==1)
 	{
 		head=newnode;
+		printf("Node inserted\n");
 		return head;
 	}
 	node *newnode,*cur,*prev;
@@ -72,7 +75,7 @@ node * ins_pos(int item,int pos,node *head)
 	newnode->data=item;
 	newnode->link=NULL;
 	prev=NULL;
-    cur=head;
+        cur=head;
     while(cur!=NULL)
     {
     	count++;
@@ -86,6 +89,7 @@ node * ins_pos(int item,int pos,node *head)
     	prev->link=newnode;
     	newnode->link=cur;
     }
+	printf("Node inserted\n");
     return head;
 }
 
@@ -135,19 +139,7 @@ void reverse(node *head)
 
 node * concate(node *first,node *sec)
 {
-	/*if(first==NULL)
-		return sec;
-	if(sec==NULL)
-		return first;
-
-	node *temp;
-	temp=first;
-	while(temp!=NULL)
-	{
-		temp=temp->link;
-	}
-	temp->link=sec;
-	return temp;*/
+	
        if(first!=NULL&&sec!=NULL)
        {
          if(first->link==NULL)
@@ -203,7 +195,7 @@ void display(node *head)
 
 	}
 	else
-	{       printf("\n\n\n");
+	{       printf("\nList contains:\n");
 		while(temp!=NULL)
 		{
 			printf("%d\n",temp->data);
@@ -219,11 +211,11 @@ void main()
 	node *head=NULL,*ptr,*first=NULL,*second=NULL;
 	for(;;)
 	{
-		printf("Enter the choice\n1.Insert at front\n2.Insert at rear\n3.Insert at any position\n4.Delete at any position\n5.Display\n6.Reverse\n7.Concatenation\n8.Search\n");
+		printf("\nEnter the choice\n1.Insert at front\n2.Insert at rear\n3.Insert at any position\n4.Delete at any position\n5.Display\n6.Reverse\n7.Concatenation\n8.Search\n");
 		scanf("%d",&ch);
 		switch(ch)
 		{
-			case 1:printf("Enter the item to be inserted:\n");
+	    case 1:printf("Enter the item to be inserted:\n");
                    scanf("%d",&item);
                    head=ins_beg(item,head);
                    break;
@@ -233,7 +225,7 @@ void main()
                    break;
             case 3:printf("Enter the item to be inserted:\n");
                    scanf("%d",&item);
-                   printf("Enter the position\n");
+                   printf("Enter the position:\n");
                    scanf("%d",&pos);
                    head=ins_pos(item,pos,head);
                    break;
@@ -248,7 +240,7 @@ void main()
             case 7:printf("Enter the size of first node:\n");
                    scanf("%d",&n1);
                    if(n1>0)
-                   {printf("Enter the elements:");
+                   {printf("Enter the elements:\n");
                    for (int i = 0; i < n1; ++i)
                    {   scanf("%d",&item);
                    	  first=ins_rear(item,first);
@@ -256,7 +248,7 @@ void main()
                    printf("Enter the size of second node:\n");
                    scanf("%d",&n2);
                    if(n2>0)
-                   {printf("Enter the elements:");
+                   {printf("Enter the elements:\n");
                    for (int i = 0; i < n2; ++i)
                    {
                    	  scanf("%d",&item);
