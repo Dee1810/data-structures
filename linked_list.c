@@ -25,16 +25,8 @@ node * ins_beg(int item,node *head)
 	node *newnode;
 	newnode=getnode();
 	newnode->data=item;
-	newnode->link=NULL;
-	if(head==NULL)
-	{
-		head=newnode;
-	}
-	else
-	{
-		newnode->link=head;
-		head=newnode;
-	}
+	newnode->link=head;
+	head=newnode;
 	return head;
 }
 
@@ -70,6 +62,11 @@ node * ins_pos(int item,int pos,node *head)
 		printf("Invalid position\n");
 		return head;
 	}
+	if(head==NULL&&pos==1)
+	{
+		head=newnode;
+		return head;
+	}
 	node *newnode,*cur,*prev;
 	newnode=getnode();
 	newnode->data=item;
@@ -84,7 +81,7 @@ node * ins_pos(int item,int pos,node *head)
     	prev=cur;
     	cur=cur->link;
     }
-    if(cur!=NULL)
+    if(pos==count)
     {
     	prev->link=newnode;
     	newnode->link=cur;
@@ -111,7 +108,7 @@ node * del_pos(int pos,node *head)
     	prev=cur;
     	cur=cur->link;
     }
-    if(cur!=NULL)
+    if(pos==count)
     {
     	prev->link=cur->link;
     	printf("%d at %d position deleted\n",cur->data,pos);
