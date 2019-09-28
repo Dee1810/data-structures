@@ -58,6 +58,10 @@ node * ins_rear(int item,node  *head)
 node * ins_pos(int item,int pos,node *head)
 {
 	int count=0;
+	node *newnode,*cur,*prev;
+	newnode=getnode();
+	newnode->data=item;
+	newnode->link=NULL;
 
 	if(head==NULL||pos<1)
 	{
@@ -70,10 +74,7 @@ node * ins_pos(int item,int pos,node *head)
 		printf("Node inserted\n");
 		return head;
 	}
-	node *newnode,*cur,*prev;
-	newnode=getnode();
-	newnode->data=item;
-	newnode->link=NULL;
+	
 	prev=NULL;
         cur=head;
     while(cur!=NULL)
