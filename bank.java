@@ -2,13 +2,13 @@ import java.util.Scanner;
 
 class BankWork
 {
-          final int max_limit=20;
+          final int max_limit=5;
           final  int min_limit=1;
           final double min_bal=500;
-         private  String name[]=new String[20];
-         private int accNo[]=new int[20];
-         private  String accType[]=new String[20];
-         private double balAmt[]=new double[20];
+         private  String name[]=new String[5];
+         private int accNo[]=new int[5];
+         private  String accType[]=new String[5];
+         private double balAmt[]=new double[5];
          static int totRec=0;
         //constructor
         BankWork()
@@ -27,10 +27,10 @@ class BankWork
         //TO  ADD NEW RECORD
 public void newEntry()
         {
-               String str;
+              /* String str;
                int acno;
-               double amt;
-               boolean permit;
+               double amt;*/
+               
                
                
                totRec++;         // Incrementing Total Record               
@@ -64,30 +64,25 @@ public void newEntry()
         //TO DISPLAY DETAILS OF RECORD
 public void display()
         {
-              String str;
-              int acno=0;
+            
+            
               //boolean valid=true;
                            
               System.out.println("\n\n=====DISPLAYING DETAILS OF CUSTOMER=====\n");
               
               //   BufferedReader obj = new BufferedReader(new InputStreamReader(System.in));
-Scanner obj=new Scanner(System.in);                
+/*Scanner obj=new Scanner(System.in);                
  System.out.print("Enter Account number : ");
                  System.out.flush();
                  str=obj.nextLine();
-                 acno=Integer.parseInt(str);
-                  if (acno<min_limit  || acno>totRec)   //To check whether accNo is valid or Not
-                     {
-                          System.out.println("\n\n\nInvalid Account Number \n\n");
-                                               }
-
-                   else
-                      {     
+                // acno=Integer.parseInt(str);*/
+                  
+                 
                         System.out.println("\n\nAccount Number : "+accNo[acno]);
                         System.out.println("Name : "+name[acno]);
                         System.out.println("Account Type : "+accType[acno]);
                         System.out.println("Balance Amount : "+balAmt[acno]+"\n\n\n");
-                      }
+                      
                  
         }
 
@@ -96,9 +91,9 @@ Scanner obj=new Scanner(System.in);
           //TO DEPOSIT AN AMOUNT
 public void deposit()
         {
-              String str;
+             // String str;
               double amt;
-              int acno;
+            /*  int acno;
               //boolean valid=true;
               System.out.println("\n\n\n=====DEPOSIT AMOUNT=====");
               
@@ -117,7 +112,7 @@ public void deposit()
                          }
            
                         else
-                       {
+                       {*/
                             System.out.print("Enter Amount you want to Deposit  : ");
                             System.out.flush();
                             str=obj.nextLine();
@@ -129,7 +124,7 @@ public void deposit()
                             System.out.println("\nAfter Updation...");
                             System.out.println("Account Number :  "+acno);
                             System.out.println("Balance Amount :  "+balAmt[acno]+"\n\n\n");
-                        }
+                        
                 
        }
 
@@ -138,16 +133,16 @@ public void deposit()
      //TO WITHDRAW BALANCE
 public void withdraw()
         {
-              String str;
+            //  String str;
               double amt,checkamt;
-              int acno;
+              //int acno;
               //boolean valid=true;
               System.out.println("\n\n\n=====WITHDRAW AMOUNT=====");
               
               //try{
                    //Reading deposit value
                 //   BufferedReader obj = new BufferedReader(new InputStreamReader(System.in));
-                  Scanner obj=new Scanner(System.in); 
+                /*  Scanner obj=new Scanner(System.in); 
                         System.out.print("Enter Account No : ");
                         System.out.flush();
                         str=obj.nextLine();
@@ -160,7 +155,7 @@ public void withdraw()
                             }
 
                         else
-                        {
+                        {*/
                                 System.out.println("Balance is : "+balAmt[acno]);
                                 System.out.print("Enter Amount you want to withdraw  : ");
                                 System.out.flush();
@@ -182,19 +177,19 @@ public void withdraw()
                                     System.out.println("\n\nAs per Bank Rule you should maintain minimum balance of Rs 500\n\n\n");
                                 }
                         
-       }
+       
 
-}}
+}
 
 public class bank
 {
     public static void main(String args[]) 
     {
-        String str;
+        int acno;
         int choice;
         choice=0;
-
-        BankWork BW_obj = new BankWork();
+      for(int i=0;i<5;i++)
+        BankWork BW_obj[i] = new BankWork();
         
 
         for(;;)
@@ -215,16 +210,45 @@ Scanner obj=new Scanner(System.in);
                           switch(choice)
                            {
                             case 1 :  //New Record Entry
-                                            BW_obj.newEntry();
+                                                if (totRec<min_limit  || totRec>5)   //To check whether accNo is valid or Not
+                     {
+                          System.out.println("\n\n\nInvalid Account Number \n\n");
+                                               }
+                                              else
+                                            BW_obj[totRec].newEntry();
                                            break;
                             case 2 :  //Displaying Record Details
-                                           BW_obj.display();
+                                              Scanner obj=new Scanner(System.in);                
+ System.out.println("Enter Account number : ");
+                 acno=obj.nextInt();
+                                                if (acno<min_limit  || acno>totRec)   //To check whether accNo is valid or Not
+                     {
+                          System.out.println("\n\n\nInvalid Account Number \n\n");
+                                               }
+                                              else
+                                           BW_obj[acno-1].display();
                                            break;
                             case 3 : //Deposit...
-                                            BW_obj.deposit();
+                                               Scanner obj=new Scanner(System.in);                
+ System.out.println("Enter Account number : ");
+                 acno=obj.nextInt();
+                                                if (acno<min_limit  || acno>totRec)   //To check whether accNo is valid or Not
+                     {
+                          System.out.println("\n\n\nInvalid Account Number \n\n");
+                                               }
+                                              else 
+                                            BW_obj[acno-1].deposit();
                                            break;
                             case 4 : //Withdraw...
-                                            BW_obj.withdraw();
+                                                Scanner obj=new Scanner(System.in);                
+ System.out.println("Enter Account number : ");
+                 acno=obj.nextInt();
+                                                if (acno<min_limit  || acno>totRec)   //To check whether accNo is valid or Not
+                     {
+                          System.out.println("\n\n\nInvalid Account Number \n\n");
+                                               }
+                                              else
+                                            BW_obj[acno-1].withdraw();
                                             break;
                             case 5  :  System.out.println("\n\n.....THANKS FOR VISITING.....");
                                             break;
