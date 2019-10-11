@@ -1,0 +1,306 @@
+//Lab cycle-Linked list
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+int  data;
+struct Node *next;
+};
+typedef struct Node node;
+node *first=NULL,*last=NULL,*newnode,*prev,*temp,*ptr;
+
+node* create_node(int val)
+{
+  newnode=(node *)malloc(sizeof(node));
+  if(newnode==NULL)
+{
+  printf("Memory full!");
+  return 0;
+}
+else
+{
+  newnode->data=val;
+  newnode->next=NULL;
+  return newnode;
+}
+}
+void rev_display(node *ptr)
+{
+  if(first==NULL)
+{
+  printf("\nNo nodes to display\n");
+  return;
+}
+else
+{node *rev;
+rev=NULL;
+while(ptr!=NULL)
+{
+temp=ptr;
+ptr=ptr->next;
+temp->next=rev;
+rev=temp;
+}
+display(rev);
+}
+}
+void search()
+{
+int flag=0,key,pos=0;
+if(first==NULL)
+{
+ printf("\nNo nodes in the list\n");
+}
+else
+{
+printf("\nEnter the value to search:\n");
+scanf("%d",&key);
+for(ptr=first;ptr!=NULL;ptr=ptr->next)
+{
+pos=pos+1;
+if(ptr->data==key)
+{
+flag=1;
+break;
+}
+}
+if(flag==1)
+{
+printf("\n Element %d found at %d position",key,pos);
+}
+else
+{
+printf("\n Element not found\n");
+}
+}
+}
+
+void insert_first()
+{
+int val;
+printf("\nEnter the value:\n");
+scanf("%d",&val);
+newnode=create_node(val);
+if(first==last&&first==NULL)
+{
+first=last=newnode;
+first->next=NULL;
+last->next=NULL;
+}
+else
+{
+temp=first;
+first=newnode;
+first->next=temp;
+}
+}
+void insert_rear()
+{
+int val;
+printf("\nEnter the value:");
+scanf("%d",&val);
+newnode=create_node(val);
+if(first==last&&last==NULL)
+{
+first=last=newnode;
+first->next=NULL;
+last->next=NULL;
+}
+else
+{
+last->next=newnode;
+last=newnode;
+last->next=NULL;
+}
+}
+
+void insert_pos()
+{
+int pos,val,count=0,i;
+printf("\nEnter the value:\n");
+scanf("%d",&val);
+newnode=create_node(val);
+printf("\nEnter the position");
+scanf("%d",&pos);
+ptr=first;
+
+
+while(ptr!=NULL)
+{
+ptr=ptr->next;
+
+count++;
+}
+if(pos==1)
+insert_first();
+else if(pos>1&&pos<=count)
+{
+ ptr=first;
+for(i=1;i<pos;i++)
+{
+prev=ptr;
+ptr=ptr->next;
+}
+prev->next=newnode;
+newnode->next=ptr;
+}
+else
+printf("\nPosition out of range\n");
+}
+
+void del_pos()
+{
+int pos,count=0,i;
+if(first==NULL)
+{
+printf("LIST EMPTY");
+}
+else
+{
+printf("\nEnter the position:\n");
+scanf("%d",&pos);
+ptr=first;
+if(pos==1)
+{
+first=ptr->next;
+printf("\nNode deleted.\n");
+}
+else
+{
+while(ptr!=NULL)
+{
+ptr=ptr->next;
+count++;
+}
+if(pos>0&&pos<=count)
+{
+ptr=first;
+for(i=1;i<pos;i++)
+{
+prev=ptr;
+ptr=ptr->next;
+}
+prev->next=ptr->next;
+}
+else
+{printf("Position invalid");
+}free(ptr);
+
+}}}
+
+void concatenate()
+{ 
+  node *fir=NULL,*sec=NULL,*temp1,*q,*temp2;
+  int n1,i,m1,n2,m2;
+  printf("\nEnter the size of first node\n");
+  scanf("%d",&n1);
+  temp1=(node *)malloc(n1*sizeof(node));  
+for(i=0;i<n1;i++)
+  {
+   printf("\nEnter the data:\n");
+  scanf("%d",&m1);
+  
+  temp1->data=m1;
+  temp->next=NULL;
+  if(fir==NULL)
+  {
+  fir=temp1;
+  }
+  else
+  {
+  q=temp1;
+  while(q->next!=NULL)
+  {
+  q=q->next;
+  }
+  q->next=temp1;
+  }
+  }
+ 
+  printf("\nEnter the size of the second node\n");
+  scanf("%d",&n2);
+  temp2=(node *)malloc(n2*sizeof(node));  
+  for(i=0;i<n2;i++)
+{  printf("\nEnter the data\n");
+  scanf("%d",&m2);
+  //temp2=(node *)malloc(sizeof(node));
+  temp2->data=m2;
+  temp2->next=NULL;
+  if(sec==NULL)
+  {
+  sec=temp2;
+  }
+  else
+{
+  q=temp2;
+  while(q->next!=NULL)
+  {
+   q=q->next;
+  }
+  q->next=temp2;
+  }
+  }
+  
+  
+ node *l1,*l2,*tmp;
+  l1=fir;
+  l2=sec;
+  while(l1->next!=NULL)
+{
+  l1=l1->next;
+}
+  while(l2!=NULL)
+{
+ tmp=(node *)malloc(sizeof(node));
+  tmp->data=l2->data;
+  tmp->next=NULL;
+  l1->next=tmp;
+  l1=tmp;
+l2=l2->next;
+}
+printf("\nAfter concatenation:\n");
+for(temp=fir;temp!=NULL;temp=temp->next)
+{
+ printf("%d ",temp->data);
+}
+
+}
+void display(node *ptr)
+{
+if(ptr==NULL)
+printf("\nLIST IS EMPTY\n");
+else
+{
+printf("\nList contains:\n");
+//ptr=first;
+/*while(ptr!=NULL)
+{
+printf("%d\n",ptr->data);
+ptr=ptr->next;
+}*/
+for(ptr=first;ptr!=NULL;ptr=ptr->next)
+printf("%d\t",ptr->data);
+}
+}
+
+void main()
+
+{
+int data,ch;
+for(;;)
+{printf("\nEnter the choice:\n1.Insert at the first positon\n2.Insert at the rear position\n3.Insert at any position\n4.Delete at any position\n5.Reverse the list\n6.Search the key element\n7.Display\n8.Concatenation\n");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1:insert_first();break;
+case 2:insert_rear();break;
+case 3:insert_pos();break;
+case 4:del_pos();break;
+case 5:rev_display(first);break;
+case 6:search();break;
+case 7:display(first);break;
+case 8:concatenate();break;
+default:exit(0);
+}
+}
+}
