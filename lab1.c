@@ -78,7 +78,7 @@ node * ins_pos(int item,int pos,node *head)
 		//printf("Node inserted\n");
 		return head;
 	}
-	if(pos==count)
+	if(pos==count+1)
 	{
 	  head=ins_rear(item,head);
 	  return head;
@@ -89,7 +89,7 @@ node * ins_pos(int item,int pos,node *head)
 	prev=NULL;
         cur=head;
         count=0;
-    while(cur->link!=NULL)
+    while(cur!=NULL)
     {
     	count++;
     	if(pos==count)
@@ -101,8 +101,11 @@ node * ins_pos(int item,int pos,node *head)
     {
     	prev->link=newnode;
     	newnode->link=cur;
+	    printf("Node inserted\n");
     }
-	printf("Node inserted\n");
+	else
+		printf("Invalid position");
+	
     return head;
 }
 
