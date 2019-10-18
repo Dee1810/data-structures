@@ -2,8 +2,8 @@ import java.util.*;
 class Temp
 {
  double cityTemp[][]=new double[5][6];
- double maxTemp[]=new double[5];
- double minTemp[]=new double[5];
+ double maxTemp;
+ double minTemp;
  Scanner s=new Scanner(System.in);
 void read()
 {
@@ -33,48 +33,37 @@ System.out.println();
 }
 void max()
 { 
-  int day[]=new int[5];
-  
+  //int day[]=new int[5];
+  int m,n,m1,n1;
+  maxTemp=cityTemp[0][0];
+  minTemp=cityTemp[0][0];
+  m=0;n=0;m1=0;n1=0;
    for(int i=0;i<5;i++)
-{ maxTemp[i]=cityTemp[i][0];
-day[i]=1;
-  for(int j=1;j<6;j++)
-{
-   if(cityTemp[i][j]>maxTemp[i])
-{
-   maxTemp[i]=cityTemp[i][j];
-   day[i]=j+1;
-}
-
-}
-}
-for(int i=0;i<5;i++)
-{
-  System.out.println("Maximum Temperature of "+maxTemp[i]+"recorded in the city "+(i+1)+" on day "+day[i]);
-}
-}
-void min()
 { 
-  int day[]=new int[5];
-  
-   for(int i=0;i<5;i++)
-{ minTemp[i]=cityTemp[i][0];
-day[i]=1;
-  for(int j=1;j<6;j++)
+
+  for(int j=0;j<6;j++)
 {
-   if(cityTemp[i][j]<minTemp[i])
+   if(cityTemp[i][j]>maxTemp)
 {
-   minTemp[i]=cityTemp[i][j];
-   day[i]=j+1;
+   maxTemp=cityTemp[i][j];
+   m=i+1;n=j+1;
 }
+   if(cityTemp[i][j]<minTemp)
+   {
+     minTemp=cityTemp[i][j];
+     m1=i+1;
+     n1=j+1;
 
 }
 }
-for(int i=0;i<5;i++)
-{
-  System.out.println("Minimum Temperature of "+minTemp[i]+"recorded in the city "+(i+1)+" on day "+day[i]);
 }
+  System.out.println("Maximum Temperature of "+maxTemp+"recorded in the city "+m+" on day "+n);
+
+
+
+  System.out.println("Minimum Temperature of "+minTemp+"recorded in the city "+m1+" on day "+n1);
 }
+
 
 }
 class temp{
@@ -84,7 +73,7 @@ Temp t=new Temp();
 t.read();
 t.display();
 t.max();
-t.min();
+
 }
 }
 
