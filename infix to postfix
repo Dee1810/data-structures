@@ -11,14 +11,14 @@ struct Stack
 }; 
 typedef struct Stack stack;   
 
-stack * createStack( unsigned capacity ) 
+stack * creates( unsigned capacity ) 
 { 
-   stack * s = (struct Stack*) malloc(sizeof(struct Stack)); 
+   stack * s = (stack *) malloc(sizeof(stack)); 
   
     if (!s)  
         return NULL; 
   
-    s>top = -1; 
+    s->top = -1; 
     s->capacity = capacity; 
   
     s->array = (int*) malloc(s->capacity * sizeof(int)); 
@@ -27,23 +27,23 @@ stack * createStack( unsigned capacity )
         return NULL; 
     return s; 
 } 
-int isEmpty(struct Stack* stack) 
+int isEmpty(stack * s) 
 { 
-    return stack->top == -1 ; 
+    return s->top == -1 ; 
 } 
-char peek(struct Stack* stack) 
+char peek(stack * s) 
 { 
-    return stack->array[stack->top]; 
+    return s->array[s->top]; 
 } 
-char pop(stack* s) 
+char pop(stack * s) 
 { 
-    if (!isEmpty(stack)) 
-        return stack->array[stack->top--] ; 
+    if (!isEmpty(s)) 
+        return s->array[s->top--] ; 
     return '$'; 
 } 
-void push(struct Stack* stack, char op) 
+void push(stack * s, char op) 
 { 
-    stack->array[++stack->top] = op; 
+    s->array[++s->top] = op; 
 } 
   
   
@@ -78,51 +78,51 @@ int infixToPostfix(char* exp)
     int i, k; 
   
      
-    struct Stack* stack = createStack(strlen(exp)); 
-    if(!stack) // See if stack was created successfully  
-        return -1 ; 
-  
-    for (i = 0, k = -1; exp[i]; ++i) 
+    stack * s = creates(strlen(exp)); 
+    
+     char  post[strlen(exp)];
+         for (i = 0, k = -1; exp[i]!='\0'; ++i) 
     { 
       
         if (isOperand(exp[i])) 
-            exp[++k] = exp[i]; 
+            post[++k] = exp[i]; 
           
         
         else if (exp[i] == '(') 
-            push(stack, exp[i]); 
+            push(s, exp[i]); 
           
        
         else if (exp[i] == ')') 
         { 
-            while (!isEmpty(stack) && peek(stack) != '(') 
-                exp[++k] = pop(stack); 
-            if (!isEmpty(stack) && peek(stack) != '(') 
-                return -1; // invalid expression              
+            while (!isEmpty(s) && peek(s) != '(') 
+                post[++k] = pop(s); 
+            if (!isEmpty(s) && peek(s) != '(') 
+                return -1;               
             else
-                pop(stack); 
+                pop(s); 
         } 
         else 
         { 
-            while (!isEmpty(stack) && Prec(exp[i]) <= Prec(peek(stack))) 
-                exp[++k] = pop(stack); 
-            push(stack, exp[i]); 
+            while (!isEmpty(s) && Prec(exp[i]) <= Prec(peek(s))) 
+               post[++k] = pop(s); 
+            push(s, exp[i]); 
         } 
   
     } 
   
    
-    while (!isEmpty(stack)) 
-        exp[++k] = pop(stack ); 
+    while (!isEmpty(s)) 
+        post[++k] = pop(s); 
   
-    exp[++k] = '\0'; 
-    printf( "%s", exp ); 
+    post[++k] = '\0'; 
+    printf( "%s",post); 
 } 
   
 
 int main() 
 { 
-    char exp[] = "a+b*(c^d-e)^(f+g*h)-i"; 
+    char exp[20];
+    scanf("%s",exp);
     infixToPostfix(exp); 
     return 0; 
 } 
