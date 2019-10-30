@@ -1,0 +1,167 @@
+#include <stdio.h> 
+#include <string.h> 
+#include <stdlib.h> 
+  
+ 
+struct Stack 
+{ 
+    int top; 
+    unsigned capacity; 
+    int* array; 
+}; 
+typedef struct Stack stack;   
+
+stack * creates( unsigned capacity ) 
+{ 
+   stack * s = (stack *) malloc(sizeof(stack)); 
+  
+    if (!s)  
+        return NULL; 
+  
+    s->top = -1; 
+    s->capacity = capacity; 
+  
+    s->array = (int*) malloc(s->capacity * sizeof(int)); 
+  
+    if (!s->array) 
+        return NULL; 
+    return s; 
+} 
+int isEmpty(stack * s) 
+{ 
+    return s->top == -1 ; 
+} 
+char peek(stack * s) 
+{ 
+    return s->array[s->top]; 
+} 
+char pop(stack * s) 
+{ 
+    if (!isEmpty(s)) 
+        return s->array[s->top--] ; 
+    return '$'; 
+} 
+void push(stack * s, char op) 
+{ 
+    s->array[++s->top] = op; 
+} 
+  
+  
+
+int isOperand(char ch) 
+{ 
+    return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'); 
+} 
+/*void exprev(char a[])
+{  char temp[strlen(a)];int i,k=0;
+  for(i=strlen(a);i>=0;i--) 
+  {
+    temp[k++]=a[i];
+  }
+  temp[k]='\0';
+  return temp;
+}*/
+
+int Prec(char ch) 
+{ 
+    switch (ch) 
+    { 
+    case '+': 
+    case '-': 
+        return 1; 
+  
+    case '*': 
+    case '/': 
+        return 2; 
+  
+    case '^': 
+        return 3; 
+    } 
+    return -1; 
+} 
+  
+ 
+int infixToPostfix(char* exp) 
+{ 
+    int i, k; 
+  
+     
+    stack * s = creates(strlen(exp)); 
+    
+     char  post[strlen(exp)+1];
+         for (i = 0, k = -1; i<strlen(exp); ++i) 
+    { 
+      
+        if (isOperand(exp[i])) 
+            post[++k] = exp[i]; 
+          
+        
+        else if (exp[i] == '(') 
+            push(s, exp[i]); 
+          
+       
+        else if (exp[i] == ')') 
+        { 
+            while (!isEmpty(s) && peek(s) != '(') 
+                post[++k] = pop(s); 
+            if (!isEmpty(s) && peek(s) != '(') 
+                return -1;               
+            else
+                pop(s); 
+        } 
+        else 
+        { 
+            while (!isEmpty(s) && Prec(exp[i]) <= Prec(peek(s))) 
+               post[++k] = pop(s); 
+            push(s, exp[i]); 
+        } 
+  
+    } 
+  
+   
+    while (!isEmpty(s)) 
+        post[++k] = pop(s); 
+  
+    post[++k]='\0';
+    int j;
+    i=0;
+  j=strlen(post)-1;
+  char temp;
+  while(i<j){
+temp=post[i];
+post[i]=post[j];
+post[j]=temp;
+i++;
+j--;
+  }
+    
+    printf( "%s",post); 
+} 
+  
+
+int main() 
+{ 
+    char exp[20],temp;
+    int i,j;
+    scanf("%s",exp);
+    //printf("%d",strlen(exp));
+  i=0;
+  j=strlen(exp)-1;
+
+  while(i<j){
+  temp=exp[i];
+  exp[i]=exp[j];
+  exp[j]=temp;
+  i++;
+  j--;
+  }
+  for(i=0;i<strlen(exp);i++)
+  {
+    if(exp[i]=='(')
+    exp[i]=')';
+    else if(exp[i]==')')
+    exp[i]='(';
+  }
+    infixToPostfix(exp); 
+    return 0; 
+} 
