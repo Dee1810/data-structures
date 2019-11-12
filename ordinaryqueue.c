@@ -6,33 +6,38 @@ struct queue
    int f,r;
    int q[MAX];
 };
-void push(struct queue*s)
+void push(struct queue*s,int item)
 {
-    int ele,item;
+  
       
     if(s->r==MAX-1)
     {
-        printf("FULL");
+        printf("Queue is FULL\n");
     }
     else
     {
-        scanf("%d",&ele);
-        s->r=(s->r+1);
-        s->q[s->r]=item;
+        //scanf("%d",&ele);
+       // s->r=(s->r+1);
+        s->q[++s->r]=item;
     }
 }
 void pop(struct queue*s)
 {
      if(s->f>s->r)
      {
-	 printf("Empty");     
+	 printf("Queue is Empty\n");  return;   
      }
-     else
-     {
+     
+     
          int item;
-         item=s->q[s->f];
-         s->f=(s->f)+1;
-     }
+         printf("element popped is %d",s->q[s->f++]);
+         //s->f=(s->f)+1;
+         if(s->f>s->r)
+         {
+           s->f=0;
+           s->r=-1;
+         }
+     
 }
 void display(struct queue*s)
 {
@@ -44,7 +49,7 @@ void display(struct queue*s)
      int i;
      for(i=s->f;i<=s->r;i++)
      {
-         printf("%d",s->q[i]);
+         printf("%d\n",s->q[i]);
      }
 }
 int main()
@@ -52,14 +57,15 @@ int main()
    struct queue *s;
    s->f=0;
    s->r=-1;
-   int ch;
+   int ch,item;
    for(;;)
    {
-      printf("Enter your choice\n");
+      printf("Enter your choice\n1.push\n2.pop\n3.display\n4.exit");
       scanf("%d",&ch);
       switch(ch)
       {
-         case 1:push(s);
+         case 1:scanf("%d",&item);
+         push(s,item);
          	break;
          case 2:pop(s);
          	break;
