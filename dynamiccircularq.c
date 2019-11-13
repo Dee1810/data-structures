@@ -22,7 +22,7 @@ Q * create(int capacity)
   return q;
 }
 
-void push(Q *q,int item)
+void insert(Q *q,int item)
 {
    if(q->count==q->capacity)
    {
@@ -33,16 +33,15 @@ void push(Q *q,int item)
    q->r=(q->r+1)%q->capacity;
    q->a[q->r]=item;
    q->count++;
-   printf("\nElement pushed\n");
+   printf("\nElement inserted\n");
    }
    
   
 }
 
-void pop(Q *q)
+void delete(Q *q)
 { 
-   
-  
+ 
   if(q->count==0)
   {
     printf("\nQueue is empty");
@@ -50,27 +49,39 @@ void pop(Q *q)
   }
   else
   {
-   printf("\nElement popped is %d",q->a[q->f]);
-  }
+   printf("\nElement deleted is %d",q->a[q->f]);
+  
    q->f=(q->f+1)%q->capacity;
    q->count--;
+   }
   
 }
+
 void display(Q * q)
-{
-  int i;
-  if(q->count==0)
-  {
-    printf("Queue is empty\n");
-  }
-  else
-  {
-    for(i=0;i<q->count;i++)
-    {
-      printf("%d\t",q->a[i]);
-    }
-  }
+{int i;
+  if (q->count==0) 
+    { 
+        printf("\nQueue is Empty"); 
+        return; 
+    } 
+    printf("\nElements in Circular Queue are:\n"); 
+    if (q->r>=q->f) 
+    { 
+        for (i = q->f; i <= q->r; i++) 
+            printf("%d\n",q->a[i]); 
+    } 
+    else
+    { 
+        for (i = q->f; i < q->capacity; i++) 
+            printf("%d\n", q->a[i]); 
+  
+        for (i = 0; i <= q->r; i++) 
+            printf("%d\n", q->a[i]); 
+    } 
 }
+
+
+
 void main()
 {
   int ch,item,cap;
@@ -83,11 +94,11 @@ void main()
     scanf("%d",&ch);
     switch(ch)
     {
-     case 1:printf("\nEnter the element to be pushed\n");
+     case 1:printf("\nEnter the element to be inserted\n");
            scanf("%d",&item);
-           push(q,item);
+           insert(q,item);
            break;
-     case 2:pop(q);
+     case 2:delete(q);
      
             break;
      case 3:display(q);
@@ -96,3 +107,146 @@ void main()
     }
   }
 }
+output:
+Enter the maximum size:3
+
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+1
+
+Enter the element to be inserted
+2
+
+Element inserted
+
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+1
+
+Enter the element to be inserted
+3
+
+Element inserted
+
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+1
+
+Enter the element to be inserted
+4
+
+Element inserted
+
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+3
+
+Elements in Circular Queue are:
+2
+3
+4
+
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+1
+
+Enter the element to be inserted
+5
+
+Queue is full
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+2
+
+Element deleted is 2
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+3
+
+Elements in Circular Queue are:
+3
+4
+
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+1
+
+Enter the element to be inserted
+5
+
+Element inserted
+
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+3
+
+Elements in Circular Queue are:
+3
+4
+5
+
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+2
+
+Element deleted is 3
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+1
+
+Enter the element to be inserted
+6
+
+Element inserted
+
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+3
+
+Elements in Circular Queue are:
+4
+5
+6
+
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+4
