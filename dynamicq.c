@@ -47,13 +47,14 @@ void pop(Q *q)
   }
   else
   {
-   printf("\nElement popped is %d",q->a[q->f--]);
-  }
+   printf("\nElement popped is %d",q->a[q->f++]);
+  
    if(q->f>q->r)
          {
            q->f=0;
            q->r=-1;
          }
+  }
   
 }
 void display(Q * q)
@@ -94,5 +95,109 @@ void main()
             break;
      default:exit(0);
     }
+    
   }
 }
+output:
+Enter the maximum size:3
+
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+1
+
+Enter the element to be inserted
+2
+
+Element inserted
+
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+1
+
+Enter the element to be inserted
+3
+
+Element inserted
+
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+1
+
+Enter the element to be inserted
+5
+
+Element inserted
+
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+1
+
+Enter the element to be inserted
+6
+
+Queue is full
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+2
+
+Element deleted is 2
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+3
+Queue contains:
+3	5	
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+2
+
+Element deleted is 3
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+3
+Queue contains:
+5	
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+2
+
+Element deleted is 5
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
+3
+Queue is empty
+
+Enter the choice
+1.Enqueue
+2.Dequeue
+3.Display
+4.Exit
