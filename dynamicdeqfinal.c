@@ -25,7 +25,7 @@ Q * create(int capacity)
 
 void insert_rear(Q *q,int item)
 {
-   if(q->r==(q->f+1)||(q->f==0&&q->r==q->capacity-1))
+   if(q->f==0&&q->r==(q->capacity-1)||(q->r+1==q->f))
    {
      printf("\nQueue is full");
      return;
@@ -73,12 +73,12 @@ void delete_front(Q *q)
          else
          q->f++;
          }
-         
+   }      
   
 }
 void insert_front(Q *q,int item)
 {
-   if(q->r==(q->f+1)||(q->f==0&&q->r==q->capacity-1))
+   if(q->f==0&&q->r==q->capacity-1&&(q->r+1==q->f))
    {
      printf("\nQueue is full");
      return;
@@ -123,7 +123,7 @@ void delete_rear(Q *q)
          else
          q->r--;
          }
-         
+   }      
   
 }
 void display(Q * q)
@@ -181,3 +181,145 @@ void main()
     }
   }
 }
+output:
+Enter the maximum size:4
+
+Enter the choice
+1.Insert rear
+2.Delete front
+3.Display
+4.Insert front
+5.Delete rear
+6.Exit
+1
+
+Enter the element to be pushed
+2
+
+Element inserted
+
+Enter the choice
+1.Insert rear
+2.Delete front
+3.Display
+4.Insert front
+5.Delete rear
+6.Exit
+1
+
+Enter the element to be pushed
+3
+
+Element inserted
+
+Enter the choice
+1.Insert rear
+2.Delete front
+3.Display
+4.Insert front
+5.Delete rear
+6.Exit
+4
+
+Enter the element to be pushed
+5
+
+Element inserted
+
+Enter the choice
+1.Insert rear
+2.Delete front
+3.Display
+4.Insert front
+5.Delete rear
+6.Exit
+1
+
+Enter the element to be pushed
+6
+
+Element inserted
+
+Enter the choice
+1.Insert rear
+2.Delete front
+3.Display
+4.Insert front
+5.Delete rear
+6.Exit
+3
+
+Elements in Queue are:
+5
+2
+3
+6
+
+Enter the choice
+1.Insert rear
+2.Delete front
+3.Display
+4.Insert front
+5.Delete rear
+6.Exit
+1
+
+Enter the element to be pushed
+1
+
+Queue is full
+Enter the choice
+1.Insert rear
+2.Delete front
+3.Display
+4.Insert front
+5.Delete rear
+6.Exit
+2
+
+Element deleted is 5
+Enter the choice
+1.Insert rear
+2.Delete front
+3.Display
+4.Insert front
+5.Delete rear
+6.Exit
+3
+
+Elements in Queue are:
+2
+3
+6
+
+Enter the choice
+1.Insert rear
+2.Delete front
+3.Display
+4.Insert front
+5.Delete rear
+6.Exit
+5
+
+Element deleted is 6
+Enter the choice
+1.Insert rear
+2.Delete front
+3.Display
+4.Insert front
+5.Delete rear
+6.Exit
+3
+
+Elements in Queue are:
+2
+3
+
+Enter the choice
+1.Insert rear
+2.Delete front
+3.Display
+4.Insert front
+5.Delete rear
+6.Exit
+6
